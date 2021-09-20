@@ -662,3 +662,5 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/unity,visualstudiocode,windows,visualstudio,csharp
 TattieMultiplayerRTS/Library/
+
+MultiplayerBasics/Library/
