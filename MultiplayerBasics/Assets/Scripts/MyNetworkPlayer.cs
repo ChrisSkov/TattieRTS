@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using TMPro;
 
 public class MyNetworkPlayer : NetworkBehaviour
 {
-    [SyncVar]
+
+    [SerializeField] TMP_Text displayNameText = null;
+    [SerializeField] Renderer displayerColorRenderer = null;
+
+    [SyncVar(hook = nameof(HandleDisplayNameUpdated))]
     [SerializeField]
     private string displayName = "Missing Name";
 
-    [SyncVar]
+    [SyncVar(hook = nameof(HandleDisplayColorUpdated))]
     [SerializeField]
     private Color myColor = Color.black;
 
@@ -23,5 +28,15 @@ public class MyNetworkPlayer : NetworkBehaviour
     public void SetDisplayColor(Color newDisplayColor)
     {
         myColor = newDisplayColor;
+    }
+
+
+    private void HandleDisplayNameUpdated(string oldName, string newName)
+    {
+        displayNameText.text = newName;
+    }
+    private void HandleDisplayColorUpdated(Color oldColor, Color newColor)
+    {
+        displayerColorRenderer.material.SetColor("_BaseColor", newColor);
     }
 }
