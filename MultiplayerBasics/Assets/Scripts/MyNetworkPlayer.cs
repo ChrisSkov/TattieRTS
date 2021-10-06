@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using TMPro;
-
 public class MyNetworkPlayer : NetworkBehaviour
 {
-
     int[] res = new int[5];
     [SerializeField] TMP_Text displayNameText = null;
     [SerializeField] Renderer displayerColorRenderer = null;
@@ -19,13 +15,14 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SerializeField]
     private Color myColor = Color.black;
 
-
     #region Server
 
     [Server]
     public void SetDisplayName(string newDisplayName)
     {
         displayName = newDisplayName;
+
+
     }
 
     [Server]
@@ -37,6 +34,8 @@ public class MyNetworkPlayer : NetworkBehaviour
     [Command]
     private void CmdSetDisplayname(string newDisplayName)
     {
+
+        if (newDisplayName.Length < 2 || newDisplayName.Length > 20) return;
         RpcLogNewName(newDisplayName);
         SetDisplayName(newDisplayName);
     }
@@ -56,7 +55,7 @@ public class MyNetworkPlayer : NetworkBehaviour
     [ContextMenu("Set My Name")]
     void SetMyName()
     {
-        CmdSetDisplayname("my new name");
+        CmdSetDisplayname("m");
     }
 
     [ClientRpc]
