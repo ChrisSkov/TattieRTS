@@ -7,6 +7,7 @@ using TMPro;
 public class MyNetworkPlayer : NetworkBehaviour
 {
 
+    int[] res = new int[5];
     [SerializeField] TMP_Text displayNameText = null;
     [SerializeField] Renderer displayerColorRenderer = null;
 
@@ -17,6 +18,9 @@ public class MyNetworkPlayer : NetworkBehaviour
     [SyncVar(hook = nameof(HandleDisplayColorUpdated))]
     [SerializeField]
     private Color myColor = Color.black;
+
+
+    #region Server
 
     [Server]
     public void SetDisplayName(string newDisplayName)
@@ -30,7 +34,16 @@ public class MyNetworkPlayer : NetworkBehaviour
         myColor = newDisplayColor;
     }
 
+    [Command]
+    private void CmdSetDisplayname(string newDisplayName)
+    {
+        RpcLogNewName(newDisplayName);
+        SetDisplayName(newDisplayName);
+    }
 
+    #endregion
+
+    #region Client
     private void HandleDisplayNameUpdated(string oldName, string newName)
     {
         displayNameText.text = newName;
@@ -39,4 +52,19 @@ public class MyNetworkPlayer : NetworkBehaviour
     {
         displayerColorRenderer.material.SetColor("_BaseColor", newColor);
     }
+
+    [ContextMenu("Set My Name")]
+    void SetMyName()
+    {
+        CmdSetDisplayname("my new name");
+    }
+
+    [ClientRpc]
+    private void RpcLogNewName(string newDisplayName)
+    {
+        Debug.Log(newDisplayName);
+    }
+    #endregion
+
+
 }
