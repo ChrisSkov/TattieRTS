@@ -135,8 +135,8 @@ GameObject:
   - component: {fileID: 189434154}
   - component: {fileID: 189434153}
   - component: {fileID: 189434152}
-  m_Layer: 0
-  m_Name: Plane
+  m_Layer: 12
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1056,7 +1056,7 @@ MonoBehaviour:
   unitSelectionArea: {fileID: 680949042}
   layerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 1024
 --- !u!114 &2127043650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,7 +1072,7 @@ MonoBehaviour:
   unitSelectionHandler: {fileID: 2127043649}
   layerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 5121
 --- !u!1 &2138677391
 GameObject:
   m_ObjectHideFlags: 0
